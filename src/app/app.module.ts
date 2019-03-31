@@ -56,12 +56,12 @@ const routes: Route[] = [
 ]
 
 const configFirebase = {
-    apiKey: "AIzaSyBptSBgGOscoa8dWqnRtrkaPwI6Saua760",
-    authDomain: "sunpwam.firebaseapp.com",
-    databaseURL: "https://sunpwam.firebaseio.com",
-    projectId: "sunpwam",
-    storageBucket: "sunpwam.appspot.com",
-    messagingSenderId: "116971074711"
+    apiKey: "AIzaSyB6CAyB9yVvpjxAwKF5GUX6il2-uOcX6jI",
+    authDomain: "sunexpwa-ae26d.firebaseapp.com",
+    databaseURL: "https://sunexpwa-ae26d.firebaseio.com",
+    projectId: "sunexpwa-ae26d",
+    storageBucket: "sunexpwa-ae26d.appspot.com",
+    messagingSenderId: "666998141049"
   };
 
 @NgModule({

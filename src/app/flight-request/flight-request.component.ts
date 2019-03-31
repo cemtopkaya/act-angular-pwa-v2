@@ -42,12 +42,17 @@ export class FlightRequestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var a = this.flightService
-      .getBrokers()
-      .subscribe(function (data) {
-        console.log("Brokerssss: ", data)
-        this.brokers = data;
-      });
+    this.flightService.getBrokers()
+      .subscribe(actionArray=>{
+        console.log("actionArray:", actionArray)
+        this.brokers = actionArray.map(val => {
+          console.log("val: ",val)
+          const obj = { key: val.payload.doc.id, ...val.payload.doc.data() }
+          console.log("obj: ",obj)
+          return obj
+        })
+      })
+
 
     this.flightRevenueTypes = ['Ferry', 'Live'];
     this.currentUser = this.userService.getCurrentUser();

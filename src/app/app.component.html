@@ -29,7 +29,8 @@
     <mat-list>
       <mat-list-item 
         *ngFor="let link of links"
-        [routerLink]="['flightRequests',{status:link.address}]">
+        [routerLink]="['flightRequests',{status:link.address}]"
+        (click)="snavMenu.close()">
             
         <mat-icon mat-list-icon>{{link.icon}}</mat-icon>
         <h4 mat-line>{{link.text}}</h4>

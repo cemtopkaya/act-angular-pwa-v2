@@ -12,7 +12,7 @@
 		<div class="form-container">
 			<mat-form-field>
 				<mat-select placeholder="Broker" [(ngModel)]="flightBroker">
-					<mat-option *ngFor="let b of brokers" [value]="b.id">{{b.name}}</mat-option>
+					<mat-option *ngFor="let b of brokers" [value]="b.key">{{b.name}}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>

@@ -28,7 +28,7 @@ import {
 
 /******  Firebase Modules ******/
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 /******  Components ******/
 import { AppComponent } from './app.component';
@@ -89,7 +89,7 @@ const configFirebase = {
     MatNativeDateModule,
 
     AngularFireModule.initializeApp(configFirebase,'sunpwam'),
-    AngularFireDatabaseModule
+    AngularFirestoreModule
 
   ],
   declarations: [

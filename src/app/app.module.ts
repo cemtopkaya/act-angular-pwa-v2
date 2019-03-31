@@ -56,14 +56,13 @@ const routes: Route[] = [
 ]
 
 const configFirebase = {
-  apiKey: "AIzaSyCQUrLSLbor5-mkYucRp93rt1SLBD9tmUk",
-  authDomain: "sunexpwa.firebaseapp.com",
-  databaseURL: "https://sunexpwa.firebaseio.com",
-  projectId: "sunexpwa",
-  storageBucket: "sunexpwa.appspot.com",
-  messagingSenderId: "49323207495"
-};
-
+    apiKey: "AIzaSyBptSBgGOscoa8dWqnRtrkaPwI6Saua760",
+    authDomain: "sunpwam.firebaseapp.com",
+    databaseURL: "https://sunpwam.firebaseio.com",
+    projectId: "sunpwam",
+    storageBucket: "sunpwam.appspot.com",
+    messagingSenderId: "116971074711"
+  };
 
 @NgModule({
   imports: [
@@ -89,7 +88,7 @@ const configFirebase = {
     MatDatepickerModule,
     MatNativeDateModule,
 
-    AngularFireModule.initializeApp(configFirebase),
+    AngularFireModule.initializeApp(configFirebase,'sunpwam'),
     AngularFireDatabaseModule
 
   ],

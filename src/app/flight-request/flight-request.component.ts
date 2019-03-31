@@ -42,8 +42,10 @@ export class FlightRequestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.flightService.getBrokers().subscribe(function(brokers){
-      console.log("Brokers: ",brokers)
+    var a = this.flightService.getBrokers();
+    console.log("a:",a)
+    a.subscribe(function (brokers) {
+      console.log("Brokers: ", brokers)
       this.brokers = brokers;
     });
     this.flightRevenueTypes = ['Ferry', 'Live'];

@@ -72,7 +72,7 @@ const reqs: FlightRequest[] = [
 @Injectable()
 export class FlightRequestService {
 
-  private dbNameBroker: string = '/Broker';
+  private dbNameBroker: string = '/company';
   private dbNameRequest: string = '/Request';
 
   
@@ -86,7 +86,7 @@ export class FlightRequestService {
     //   { id: 4, name: 'FreeBird', logo: 'https://i.pinimg.com/originals/14/ff/a4/14ffa44fd6f686bdb83d747a578d63ed.png' },
     // ];
     let brokers = this.db.list(this.dbNameBroker).snapshotChanges();
-    debugger;
+    // debugger;
     return brokers;
   }
 

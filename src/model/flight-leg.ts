@@ -3,4 +3,7 @@ export class FlightLeg {
   from: string;
   to: string;
   type: string;
+  
+  fromRef: string;
+  toRef: string;
 }

@@ -32,7 +32,7 @@ export class FlightRequestComponent implements OnInit {
   flightTo: String = "SAW";
   flightRevenue: String = "Live";
   flightLegsDS = new MatTableDataSource<FlightLeg>();
-  flightBroker: number = 1;
+  flightBroker: String="";
 
 
   constructor(
@@ -57,33 +57,33 @@ export class FlightRequestComponent implements OnInit {
     this.flightRevenueTypes = ['Ferry', 'Live'];
     this.currentUser = this.userService.getCurrentUser();
 
-    this.request = <FlightRequest>{
+    this.request = {
       status: FlightRequestStatus['New'],
       createdBy: this.currentUser,
       createdDate: (new Date()).toLocaleString(),
       flights: []
-    };
+    } as FlightRequest
   }
 
   addFlightLeg() {
-    const flightLeg = <FlightLeg>{
+    const flightLeg = {
       date: this.flightDate.toLocaleString(),
       from: this.flightFrom,
       to: this.flightTo,
       type: this.flightRevenue
-    };
+    } as FlightLeg
     this.request.flights.push(flightLeg);
     this.flightLegsDS.data = this.request.flights;
     this.changeFromTo()
   }
 
   private changeFromTo() {
-    const lastIdx = this.request.flights.length-1
+    const lastIdx = this.request.flights.length - 1
 
     this.flightFrom = this.request.flights[lastIdx].to
     this.flightTo = lastIdx > 0
-        ? this.request.flights[0].from
-        : this.request.flights[lastIdx].from
+      ? this.request.flights[0].from
+      : this.request.flights[lastIdx].from
   }
 
   removeAll() {
@@ -97,7 +97,8 @@ export class FlightRequestComponent implements OnInit {
   }
 
   save() {
-    this.request.broker = this.brokers.find(b => b.key == this.flightBroker).name;
+    console.log("save request")
+    this.request.brokerRef = this.flightBroker;
     console.log(this.flightBroker)
     this.flightService.saveRequest(this.request);
     this.router.navigate(['/flightRequests', { status: 'New' }]);

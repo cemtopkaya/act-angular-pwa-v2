@@ -10,4 +10,7 @@ export class FlightRequest {
   createdBy:SalesPerson;
   createdDate:string;
   flights:FlightLeg[];
+
+  brokerRef:String;
+  createdByRef:String;
 }

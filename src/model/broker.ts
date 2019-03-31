@@ -1,5 +1,5 @@
 export interface Broker {
-  id:number
+  key:number
   name:string
   logo:string
 }

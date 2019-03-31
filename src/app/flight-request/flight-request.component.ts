@@ -43,12 +43,12 @@ export class FlightRequestComponent implements OnInit {
 
   ngOnInit() {
     this.flightService.getBrokers()
-      .subscribe(actionArray=>{
+      .subscribe(actionArray => {
         console.log("actionArray:", actionArray)
         this.brokers = actionArray.map(val => {
-          console.log("val: ",val)
+          console.log("val: ", val)
           const obj = { key: val.payload.doc.id, ...val.payload.doc.data() }
-          console.log("obj: ",obj)
+          console.log("obj: ", obj)
           return obj
         })
       })
@@ -60,22 +60,31 @@ export class FlightRequestComponent implements OnInit {
     this.request = <FlightRequest>{
       status: FlightRequestStatus['New'],
       createdBy: this.currentUser,
-      createdDate: (new Date()).toLocaleDateString(),
+      createdDate: (new Date()).toLocaleString(),
       flights: []
     };
   }
 
   addFlightLeg() {
     const flightLeg = <FlightLeg>{
-      date: this.flightDate.toLocaleDateString(),
+      date: this.flightDate.toLocaleString(),
       from: this.flightFrom,
       to: this.flightTo,
       type: this.flightRevenue
     };
     this.request.flights.push(flightLeg);
     this.flightLegsDS.data = this.request.flights;
+    this.changeFromTo()
   }
 
+  private changeFromTo() {
+    const lastIdx = this.request.flights.length-1
+
+    this.flightFrom = this.request.flights[lastIdx].to
+    this.flightTo = lastIdx > 0
+        ? this.request.flights[0].from
+        : this.request.flights[lastIdx].from
+  }
 
   removeAll() {
     this.request.flights = [];
@@ -88,7 +97,7 @@ export class FlightRequestComponent implements OnInit {
   }
 
   save() {
-    this.request.broker = this.brokers.find(b => b.id == this.flightBroker).name;
+    this.request.broker = this.brokers.find(b => b.key == this.flightBroker).name;
     console.log(this.flightBroker)
     this.flightService.saveRequest(this.request);
     this.router.navigate(['/flightRequests', { status: 'New' }]);

@@ -1,0 +1,52 @@
+<mat-card>
+
+	<mat-card-header>
+		<div mat-card-avatar [ngClass]="request.broker"></div>
+		<mat-card-title>
+			{{request.broker}}
+		</mat-card-title>
+		<mat-card-subtitle>
+			{{requestStatus}}
+		</mat-card-subtitle>
+	</mat-card-header>
+
+	<mat-card-content>
+
+		<table mat-table [dataSource]="request.flights" class="mat-elevation-z0 fullWidth">
+
+			<!-- Position Column -->
+			<ng-container matColumnDef="date">
+				<th mat-header-cell *matHeaderCellDef> Flight Date </th>
+				<td mat-cell *matCellDef="let element"> {{element.date}} </td>
+			</ng-container>
+
+			<!-- Name Column -->
+			<ng-container matColumnDef="from">
+				<th mat-header-cell *matHeaderCellDef> FROM </th>
+				<td mat-cell *matCellDef="let element"> {{element.from}} </td>
+			</ng-container>
+
+			<!-- Weight Column -->
+			<ng-container matColumnDef="to">
+				<th mat-header-cell *matHeaderCellDef> TO </th>
+				<td mat-cell *matCellDef="let element"> {{element.to}} </td>
+			</ng-container>
+
+			<!-- Symbol Column -->
+			<ng-container matColumnDef="type">
+				<th mat-header-cell *matHeaderCellDef> TYPE </th>
+				<td mat-cell *matCellDef="let element"> {{element.type}} </td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+
+	</mat-card-content>
+
+	<mat-card-footer>
+		<div>
+			{{request.createdBy.name}} {{request.createdBy.surname}}, {{request.createdDate}}
+		</div>
+	</mat-card-footer>
+</mat-card>

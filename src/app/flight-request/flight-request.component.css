@@ -1,0 +1,29 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > * {
+  width: 100%;
+}
+
+#divAddFlight{
+  display:flex;
+  flex-direction: row; 
+  justify-content:space-between;
+}
+
+#divAddFlight mat-form-field :not(:last-child){
+  min-width:80px;
+  flex: 1 0 0;
+  margin-right:5px;
+}
+
+mat-card-footer{
+  text-align: right;
+  margin:10px;
+}
+
+mat-card{
+  margin-top:10px;
+}

@@ -1,0 +1,32 @@
+
+
+.Sunexpress{
+  background-image: url('https://pbs.twimg.com/profile_images/1036993386333581312/rOS-y7nA.jpg');
+  background-size: cover;
+}
+
+.Go2Sky{
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/9f/Go2sky_logo.png');
+  background-size: cover;
+}
+
+.Corendon{
+  background-image: url('https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/ab/39/62/ab396269-8ec3-34f6-636c-7c30346ee73f/source/256x256bb.jpg');
+  background-size: cover;
+}
+
+.FreeBird{
+  background-image: url('https://i.pinimg.com/originals/14/ff/a4/14ffa44fd6f686bdb83d747a578d63ed.png');
+  background-size: cover;
+}
+
+.mat-card-header-text{
+  width:100%;
+}
+
+mat-card-footer div{
+  color:gray;
+  font-size:90%;
+  padding:5px 20px 10px 0;
+  text-align:right;
+}

@@ -1,0 +1,12 @@
+<mat-card style="margin:0"><h2>Request & Status</h2></mat-card>
+
+<flight-request-card *ngFor="let req of requests" [requestInfo]="req">
+</flight-request-card>
+
+<div class="fabButton">
+
+  <a mat-fab routerLink="/flightRequest" color="primary">
+    <mat-icon>add</mat-icon>
+  </a>
+
+</div>

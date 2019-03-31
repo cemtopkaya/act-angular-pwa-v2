@@ -26,6 +26,10 @@ import {
 } from '@angular/material';
 
 
+/******  Firebase Modules ******/
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 /******  Components ******/
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -74,8 +78,11 @@ const routes: Route[] = [
     MatOptionModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
-    
+    MatNativeDateModule,
+
+    AngularFireModule,
+    AngularFireDatabaseModule
+
   ],
   declarations: [
     AppComponent,

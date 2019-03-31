@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Broker } from '../../model/broker';
 import { FlightRequest } from '../../model/flight-request';
@@ -38,8 +39,9 @@ export class FlightRequestComponent implements OnInit {
   constructor(
     public flightService: FlightRequestService,
     public userService: UserService,
-    private router: Router) {
-    this.request = new FlightRequest(userService)
+    private router: Router,
+    private db: AngularFirestore) {
+    this.request = new FlightRequest(userService, this.db)
   }
 
   ngOnInit() {
@@ -71,8 +73,8 @@ export class FlightRequestComponent implements OnInit {
       from: this.flightFrom,
       to: this.flightTo,
       type: this.flightRevenue,
-      fromRef: '/IATACodeList/' + this.flightFrom,
-      toRef: '/IATACodeList/' + this.flightTo,
+      fromRef: this.db.doc('/IATACodeList/' + this.flightFrom).ref,
+      toRef: this.db.doc('/IATACodeList/' + this.flightTo).ref,
     } as FlightLeg
     this.request.flights.push(flightLeg);
     this.flightLegsDS.data = this.request.flights;
@@ -100,7 +102,7 @@ export class FlightRequestComponent implements OnInit {
 
   save() {
     console.log("save request")
-    this.request.brokerRef = '/CompanyList/' + this.request.brokerRef;
+    // this.request.brokerRef = '/CompanyList/' + this.request.brokerRef;
     console.log(this.request)
 
     this.flightService.saveRequest(this.request);

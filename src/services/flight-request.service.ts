@@ -89,19 +89,24 @@ export class FlightRequestService {
 
   saveRequest(request: FlightRequest) {
 
-    console.log("Save Request", JSON.stringify({ ...request }))
+    console.log("Save Request")
     const req = {
-      brokerRef: request.brokerRef,
+      brokerRef: this.db.doc('CompanyList/' + request.brokerRef).ref,
       createdByRef: request.createdByRef,
       createdDate: request.createdDate,
-      flights: request.flights.map(f=>{
-       delete(f.from);
-       delete(f.to);
-       return f;
+      flights: request.flights.map(f => {
+        delete (f.from);
+        delete (f.to);
+        return f;
       })
     }
-    this.db.collection(this.collRequest).add(req)
+    this.db.collection(this.collRequest).add(req).then(ref => {
+      console.log("REFFFF: ", ref)
+      // ref.update({ brokerRef: request.brokerRef}).then(console.log)
+      //this.db.collection(this.collRequest).doc(ref)
+    })
     // reqs.push();
+    //.collection(this.collBroker)
   }
 }
 

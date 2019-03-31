@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireDatabase,AngularFireObject, AngularFireList } from 'angularfire2/database';
-
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
 
 import { FlightRequest } from '../model/flight-request';
 import { FlightRequestStatus } from '../model/flight-request-status.enum';
 import { Broker } from '../model/broker';
+
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const reqs: FlightRequest[] = [
@@ -79,16 +79,40 @@ export class FlightRequestService {
 
   constructor(private db: AngularFirestore) { }
 
-  getBrokers(): any {
+  getBrokers() {
     return this.db.collection(this.collBroker).snapshotChanges()
   }
 
-  getRequests(): any {
+  getRequests() {
     return this.db.collection(this.collRequest).snapshotChanges()
-   // return reqs;
   }
 
   saveRequest(request: FlightRequest) {
-    reqs.push(request);
+
+    console.log("Save Request", JSON.stringify({ ...request }))
+    const req = {
+      brokerRef: request.brokerRef,
+      createdByRef: request.createdByRef,
+      createdDate: request.createdDate,
+      flights: request.flights.map(f=>{
+       delete(f.from);
+       delete(f.to);
+       return f;
+      })
+    }
+    this.db.collection(this.collRequest).add(req)
+    // reqs.push();
   }
 }
+
+/*
+{
+      brokerRef: request.brokerRef,
+createdByRef: request.createdByRef,
+createdDate: request.createdDate,
+    }
+
+    
+    {"status":0,"createdDate":"01.04.2019 00:25:53","flights":[{"date":"20.04.2019 00:00:00","from":"AYT","to":"SAW","type":"Live","fromRef":"/IATACodeList/AYT","toRef":"/IATACodeList/SAW"},{"date":"20.04.2019 00:00:00","from":"SAW","to":"AYT","type":"Live","fromRef":"/IATACodeList/SAW","toRef":"/IATACodeList/AYT"}],"createdBy":{"key":"z77lYhScLphpp4lITr7S","name":"Elvan","surname":"Özkul"},"createdByRef":"/SalesmenList/z77lYhScLphpp4lITr7S","brokerRef":"/CompanyList/6uX5l7XTUwGcLCH2o9kM"}
+
+ */

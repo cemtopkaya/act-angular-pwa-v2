@@ -32,14 +32,15 @@ export class FlightRequestComponent implements OnInit {
   flightTo: String = "SAW";
   flightRevenue: String = "Live";
   flightLegsDS = new MatTableDataSource<FlightLeg>();
-  flightBroker: String="";
+  flightBroker: String = "";
 
 
   constructor(
     public flightService: FlightRequestService,
     public userService: UserService,
-    private router: Router
-  ) { }
+    private router: Router) {
+    this.request = new FlightRequest(userService)
+  }
 
   ngOnInit() {
     this.flightService.getBrokers()
@@ -55,14 +56,13 @@ export class FlightRequestComponent implements OnInit {
 
 
     this.flightRevenueTypes = ['Ferry', 'Live'];
-    this.currentUser = this.userService.getCurrentUser();
 
-    this.request = {
-      status: FlightRequestStatus['New'],
-      createdBy: this.currentUser,
-      createdDate: (new Date()).toLocaleString(),
-      flights: []
-    } as FlightRequest
+    // this.request = {
+    //   status: FlightRequestStatus['New'],
+    //   createdBy: this.currentUser,
+    //   createdDate: (new Date()).toLocaleString(),
+    //   flights: []
+    // } as FlightRequest
   }
 
   addFlightLeg() {
@@ -70,7 +70,9 @@ export class FlightRequestComponent implements OnInit {
       date: this.flightDate.toLocaleString(),
       from: this.flightFrom,
       to: this.flightTo,
-      type: this.flightRevenue
+      type: this.flightRevenue,
+      fromRef: '/IATACodeList/' + this.flightFrom,
+      toRef: '/IATACodeList/' + this.flightTo,
     } as FlightLeg
     this.request.flights.push(flightLeg);
     this.flightLegsDS.data = this.request.flights;
@@ -98,8 +100,9 @@ export class FlightRequestComponent implements OnInit {
 
   save() {
     console.log("save request")
-    this.request.brokerRef = this.flightBroker;
-    console.log(this.flightBroker)
+    this.request.brokerRef = '/CompanyList/' + this.request.brokerRef;
+    console.log(this.request)
+
     this.flightService.saveRequest(this.request);
     this.router.navigate(['/flightRequests', { status: 'New' }]);
   }

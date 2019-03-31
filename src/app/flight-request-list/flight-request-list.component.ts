@@ -36,6 +36,7 @@ export class FlightRequestListComponent {
           const doc = val.payload.doc;
           const data = doc.data();
           const obj = { key: doc.id, ...data }
+          console.log("data: ", data)
 
           data.createdByRef.get().then(d => {
             console.log("createdBy get", d)

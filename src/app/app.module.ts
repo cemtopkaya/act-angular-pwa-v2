@@ -55,6 +55,15 @@ const routes: Route[] = [
   { path: "flightRequest", component: FlightRequestComponent },
 ]
 
+const configFirebase = {
+  apiKey: "AIzaSyCQUrLSLbor5-mkYucRp93rt1SLBD9tmUk",
+  authDomain: "sunexpwa.firebaseapp.com",
+  databaseURL: "https://sunexpwa.firebaseio.com",
+  projectId: "sunexpwa",
+  storageBucket: "sunexpwa.appspot.com",
+  messagingSenderId: "49323207495"
+};
+
 
 @NgModule({
   imports: [
@@ -80,7 +89,7 @@ const routes: Route[] = [
     MatDatepickerModule,
     MatNativeDateModule,
 
-    AngularFireModule,
+    AngularFireModule.initializeApp(configFirebase),
     AngularFireDatabaseModule
 
   ],

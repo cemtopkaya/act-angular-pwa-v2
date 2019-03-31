@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+
 import { FlightRequest } from '../model/flight-request';
 import { FlightRequestStatus } from '../model/flight-request-status.enum';
 import { Broker } from '../model/broker';
@@ -70,16 +72,21 @@ const reqs: FlightRequest[] = [
 @Injectable()
 export class FlightRequestService {
 
-  constructor() { }
+  private dbNameBroker: string = '/Broker';
+  private dbNameRequest: string = '/Request';
 
-  getBrokers(): Broker[] {
-    const brokers: Broker[] = [
-      { id: 1, name: 'Sunexpress', logo: 'https://pbs.twimg.com/profile_images/1036993386333581312/rOS-y7nA.jpg' },
-      { id: 2, name: 'Corendon', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Go2sky_logo.png' },
-      { id: 3, name: 'Go2Sky', logo: 'https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/ab/39/62/ab396269-8ec3-34f6-636c-7c30346ee73f/source/256x256bb.jpg' },
-      { id: 4, name: 'FreeBird', logo: 'https://i.pinimg.com/originals/14/ff/a4/14ffa44fd6f686bdb83d747a578d63ed.png' },
-    ];
+  
+  constructor(private db: AngularFireDatabase) { }
 
+  getBrokers(): any {
+    // const brokers: Broker[] = [
+    //   { id: 1, name: 'Sunexpress', logo: 'https://pbs.twimg.com/profile_images/1036993386333581312/rOS-y7nA.jpg' },
+    //   { id: 2, name: 'Corendon', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Go2sky_logo.png' },
+    //   { id: 3, name: 'Go2Sky', logo: 'https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/ab/39/62/ab396269-8ec3-34f6-636c-7c30346ee73f/source/256x256bb.jpg' },
+    //   { id: 4, name: 'FreeBird', logo: 'https://i.pinimg.com/originals/14/ff/a4/14ffa44fd6f686bdb83d747a578d63ed.png' },
+    // ];
+    let brokers = this.db.list(this.dbNameBroker).snapshotChanges();
+    debugger;
     return brokers;
   }
 
